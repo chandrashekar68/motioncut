@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Interface</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="search-container">
+        <div class="dropdown">
+            <button class="dropbtn">Everything</button>
+            <div class="dropdown-content">
+                <a href="#">Everything</a>
+                <a href="#">Software Development</a>
+                <a href="#">Web Development</a>
+                <a href="#">Data Analyst</a>
+                <a href="#">IT Consultant</a>
+                <a href="#">Network Administrator</a>
+            </div>
+        </div>
+        <input type="text" id="search-input" placeholder="Search in Everything...">
+        <button id="search-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 2a8 8 0 0 1 6.32 12.9l4.387 4.386-1.414 1.415-4.386-4.388A8 8 0 1 1 10 2zm0 2a6 6 0 1 0 0 12 6 6 0 0 0 0-12z" fill="rgba(255,255,255,1)"/></svg>
+        </button>
+    </div>
+    <script>
+        // Toggle dropdown visibility
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdown = document.querySelector('.dropdown');
+            const dropdownContent = document.querySelector('.dropdown-content');
+            const dropbtn = document.querySelector('.dropbtn');
+            const searchInput = document.getElementById('search-input');
+
+            dropbtn.addEventListener('click', function(event) {
+                event.stopPropagation();
+                dropdownContent.classList.toggle('show');
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!dropdown.contains(event.target)) {
+                    dropdownContent.classList.remove('show');
+                }
+            });
+
+            dropdownContent.addEventListener('click', function(event) {
+                const selectedCategory = event.target.textContent;
+                dropbtn.textContent = selectedCategory;
+                searchInput.placeholder = `Search in ${selectedCategory}...`;
+                dropdownContent.classList.remove('show');
+            });
+        });
+    </script>
+</body>
+</html>
